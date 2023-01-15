@@ -1,4 +1,4 @@
-import { getCollection } from "../services/bggCollection";
+import { getCollection } from "../services/bgg-collection";
 import { loadBoardgames } from "../store/slices/boardgames";
 import { loadCollection } from "../store/slices/collection";
 

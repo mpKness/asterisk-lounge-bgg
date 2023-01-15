@@ -1,6 +1,6 @@
 import axios from "axios";
 import { parseString } from "xml2js"; 
-import { baseURL } from "./bggUser";
+import { baseURL } from "./bgg-user";
 
 export async function getCollection(username) {
     let results = {};

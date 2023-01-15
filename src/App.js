@@ -1,20 +1,18 @@
 import "./App.css";
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import UserCard from "./components/userCard";
-import { fetchUserByName } from "./thunk/fetchUserByName";
-import { getCollection } from "./services/bggCollection";
-import { fetchCollectionByUsername } from "./thunk/fetchCollectionByUsername";
-import BoardgameCard from "./components/boardgameCard";
-import { selectCollectionByUsername } from "./store/slices/collection";
+import UserCard from "./components/user-card";
+import { fetchUserByName } from "./thunk/fetch-user-by-name";
+import { getCollection } from "./services/bgg-collection";
+import { fetchCollectionByUsername } from "./thunk/fetch-collection-by-username";
+import BoardgameGrid from "./components/boardgame-grid";
 
 function App() {
   const [usernames, setUsernames] = useState('');
   const dispatch = useDispatch();
-  const collection = useSelector((state) => selectCollectionByUsername(state, usernames));
   const getUser = async () => {
     getCollection(usernames);
     dispatch(fetchUserByName(usernames));
@@ -31,11 +29,7 @@ function App() {
         <Button onClick={getUser}> Get Users </Button>
       </Box>
       <UserCard />
-      <Box sx={{display: "grid", gridTemplateColumns: "repeat(5, 20%)"}}>
-        {
-          collection.map(boardgame => <BoardgameCard key={boardgame} id={boardgame} />)
-        }
-      </Box>
+      <BoardgameGrid />
     </div>
   );
 }

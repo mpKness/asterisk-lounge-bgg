@@ -19,6 +19,10 @@ const BoardgameCard = ({id}) => {
             />
             <CardContent>
                 <Typography> {game.name} </Typography>
+                <Typography> Players: {game.minPlayers} - {game.maxPlayers} </Typography>
+                <Typography> Playtime: {game.minPlaytime} </Typography>
+                <Typography> Rank: {game.rank} </Typography>
+                <Typography> Rating: {game.rating} </Typography>
             </CardContent>
         </Card>
     );
