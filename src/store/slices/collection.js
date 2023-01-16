@@ -9,6 +9,18 @@ export const selectCollectionByUsername = createSelector([selectCollection, (sta
         }
         return [];
     });
+
+export const selectCollectionByUsernames = createSelector([selectCollection, (state, usernames) => usernames],
+    (state, usernames) => {
+        let newCollection = [];
+        usernames.forEach(username => {
+            if (username && state[username]) {
+                newCollection = newCollection.concat(state[username]);
+            }
+        })
+        return [... new Set(newCollection)];
+    }
+);
     
 export const selectGameByUser = createSelector
 

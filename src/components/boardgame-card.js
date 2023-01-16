@@ -9,6 +9,9 @@ const BoardgameCard = ({id}) => {
     const handleImageClick = () => {
         window.open(`http://boardgamegeek.com/boardgame/${id}`);
     }
+    if (!game) {
+        return null;
+    }
     return (
         <Card sx={{maxWidth: 400, margin: "5px"}}>
             <CardMedia

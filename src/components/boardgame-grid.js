@@ -2,10 +2,13 @@ import React from 'react';
 import BoardgameCard from "./boardgame-card";
 import Box from '@mui/material/Box';
 import { useSelector } from "react-redux";
-import { selectCollectionByUsername } from "../store/slices/collection";
+import { selectCollectionByUsernames } from "../store/slices/collection";
+import { selectChosenUsers } from '../store/slices/user';
 
 const BoardgameGrid = () => {
-    const collection = useSelector((state) => selectCollectionByUsername(state, 'voamer'));
+    const chosenUsers = useSelector(selectChosenUsers);
+    const collection = useSelector((state) => selectCollectionByUsernames(state, chosenUsers));
+    console.log('chosen user', collection);
 
     return (
         <Box sx={{display: "grid", gridTemplateColumns: "repeat(5, 20%)"}}>

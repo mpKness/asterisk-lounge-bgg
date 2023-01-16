@@ -1,14 +1,20 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import { useSelector } from "react-redux";
-import { selectUser } from '../store/slices/user';
+import Card from '@mui/material/Card';
+import { CardContent, Typography } from '@mui/material';
+import { chooseUser } from '../store/slices/user';
+import { useDispatch } from 'react-redux';
 
-const UserCard = () => {
-    const user = useSelector(selectUser);
+const UserCard = ({user}) => {
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(chooseUser({userID: user.id}));
+    };
     return (
-        <Box>
-            {JSON.stringify(user)}
-        </Box>
+        <Card onClick={handleClick}>
+            <CardContent sx={{backgroundColor: user.chosen ? 'blue' : 'white'}}>
+                <Typography> {user.name} </Typography>
+            </CardContent>
+        </Card>
     )
 };
 

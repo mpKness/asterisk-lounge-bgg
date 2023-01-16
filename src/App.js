@@ -9,6 +9,7 @@ import { fetchUserByName } from "./thunk/fetch-user-by-name";
 import { getCollection } from "./services/bgg-collection";
 import { fetchCollectionByUsername } from "./thunk/fetch-collection-by-username";
 import BoardgameGrid from "./components/boardgame-grid";
+import UserGrid from "./components/user-grid";
 
 function App() {
   const [usernames, setUsernames] = useState('');
@@ -28,7 +29,7 @@ function App() {
         <TextField label="usernames" onChange={(event) => setUsernames(event.target.value)}/>
         <Button onClick={getUser}> Get Users </Button>
       </Box>
-      <UserCard />
+      <UserGrid />
       <BoardgameGrid />
     </div>
   );

@@ -6,14 +6,13 @@ export async function getCollection(username) {
     let results = {};
     let parsedResults = null;
     while (results.status !== 200) {
-        results = await axios.get(`${baseURL}collection?username=${username}&stats=1`);
+        results = await axios.get(`${baseURL}collection?username=${username}&stats=1&own=1`);
         if (results.status === 200) {
             parseString(results.data, function (err, results) {
                 parsedResults = results;
             });
             return parsedResults
-        }
-        if (results.status >= 400) {
+        } else if (results.status >= 400) {
             // TODO handle error
             return {};
         }

@@ -1,6 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 export const selectUser = state => state.user;
+
+export const selectUsers = createSelector(selectUser, state => {
+    return Object.keys(state).map(userID => state[userID]);
+});
+
+export const selectChosenUsers = createSelector(selectUser, state => {
+    const users = []
+    console.log(state);
+    Object.keys(state).forEach(userID => {
+        if (state[userID].chosen) {
+            users.push(state[userID].name)
+        }
+    });
+    console.log('Users', users)
+    return users;
+});
 
 const initialState = {};
 
@@ -12,12 +28,16 @@ export const userSlice = createSlice({
             const newUser = {
                 id: action.payload.user.$.id,
                 name: action.payload.user.$.name,
+                chosen: true,
             };
             state[action.payload.user.$.id] = newUser;
+        },
+        chooseUser: (state, action) => {
+            state[action.payload.userID].chosen = !state[action.payload.userID].chosen;
         },
     },
 });
 
-export const { loadUser } = userSlice.actions;
+export const { loadUser, chooseUser } = userSlice.actions;
 
 export default userSlice.reducer;
