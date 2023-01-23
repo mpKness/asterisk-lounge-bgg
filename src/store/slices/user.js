@@ -8,13 +8,11 @@ export const selectUsers = createSelector(selectUser, state => {
 
 export const selectChosenUsers = createSelector(selectUser, state => {
     const users = []
-    console.log(state);
     Object.keys(state).forEach(userID => {
         if (state[userID].chosen) {
             users.push(state[userID].name)
         }
     });
-    console.log('Users', users)
     return users;
 });
 

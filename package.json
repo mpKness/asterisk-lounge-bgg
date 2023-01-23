@@ -1,6 +1,7 @@
 {
   "name": "asterisk-lounge",
   "version": "0.1.0",
+  "homepage": "https://mpKness.github.io/asterisk-lounge-bgg",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -22,6 +23,8 @@
     "xml2js": "^0.4.23"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

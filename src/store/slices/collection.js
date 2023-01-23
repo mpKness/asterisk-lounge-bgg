@@ -18,7 +18,7 @@ export const selectCollectionByUsernames = createSelector([selectCollection, (st
                 newCollection = newCollection.concat(state[username]);
             }
         })
-        return [... new Set(newCollection)];
+        return [...new Set(newCollection)];
     }
 );
     

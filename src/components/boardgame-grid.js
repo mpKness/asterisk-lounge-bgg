@@ -8,7 +8,6 @@ import { selectChosenUsers } from '../store/slices/user';
 const BoardgameGrid = () => {
     const chosenUsers = useSelector(selectChosenUsers);
     const collection = useSelector((state) => selectCollectionByUsernames(state, chosenUsers));
-    console.log('chosen user', collection);
 
     return (
         <Box sx={{display: "grid", gridTemplateColumns: "repeat(5, 20%)"}}>

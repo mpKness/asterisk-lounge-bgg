@@ -1,12 +1,15 @@
 import axios from "axios";
 import { parseString } from "xml2js"; 
+import { timeout } from "../utils/timeout";
 import { baseURL } from "./bgg-user";
 
-export async function getCollection(username) {
+const FIVE_SECONDS = 5000;
+
+export async function getCollection(username, options = {}) {
     let results = {};
     let parsedResults = null;
     while (results.status !== 200) {
-        results = await axios.get(`${baseURL}collection?username=${username}&stats=1&own=1`);
+        results = await fetchCollection(username, options);
         if (results.status === 200) {
             parseString(results.data, function (err, results) {
                 parsedResults = results;
@@ -16,7 +19,18 @@ export async function getCollection(username) {
             // TODO handle error
             return {};
         }
-        await setTimeout(2000);
+        await timeout(FIVE_SECONDS);
     }    
     return {};
+}
+
+
+async function fetchCollection(username, options) {
+    let url = `${baseURL}collection?username=${username}&stats=1`;
+
+    Object.keys(options, option => {
+        url = url + '&' + option + '=' + options[option];
+    });
+
+    return await axios.get(url);
 }
